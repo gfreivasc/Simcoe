@@ -19,6 +19,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -32,6 +35,9 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:1.0.2"
 
     implementation "io.reactivex.rxjava2:rxjava:2.1.0"
+
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.0.0"
 
     implementation "android.arch.lifecycle:runtime:$arch_lifecycle_version"
     implementation "android.arch.lifecycle:extensions:$arch_lifecycle_version"
