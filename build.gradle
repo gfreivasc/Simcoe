@@ -5,6 +5,7 @@ buildscript {
     ext.support_version = '25.4.0'
     ext.arch_lifecycle_version = "1.0.0-alpha2"
     ext.arch_room_version = "1.0.0-alpha2"
+    ext.dagger_version = "2.11"
     repositories {
         maven { url 'https://maven.google.com' }
         jcenter()
