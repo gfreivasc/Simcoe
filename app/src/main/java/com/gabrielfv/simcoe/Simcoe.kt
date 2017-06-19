@@ -1,11 +1,8 @@
 package com.gabrielfv.simcoe
 
-import android.app.Activity
 import android.app.Application
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
+import com.gabrielfv.simcoe.di.AppComponent
+import com.gabrielfv.simcoe.di.AppModule
 
 /**
  * @author gabriel on 6/15/17.
