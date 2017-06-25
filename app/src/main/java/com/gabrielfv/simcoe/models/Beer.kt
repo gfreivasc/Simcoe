@@ -13,5 +13,5 @@ data class Beer(
         var label: String = "",
         var type: String = ""
 ) : Serializable {
-    @PrimaryKey(autoGenerate = true) val id: Long = 0L
+    @PrimaryKey(autoGenerate = true) var id: Long = 0L
 }
