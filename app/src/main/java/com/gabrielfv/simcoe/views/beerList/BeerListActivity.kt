@@ -8,29 +8,29 @@ import com.gabrielfv.simcoe.R
 import com.gabrielfv.simcoe.Simcoe
 import com.gabrielfv.simcoe.models.Beer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_beer_list.*
 
 /**
- * Created by gabriel on 6/25/17.
+ * @author by gabriel on 6/25/17.
  */
 class BeerListActivity : AppCompatActivity() {
+    val viewModel = BeerListViewModel()
+    val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beer_list)
 
         fab.setOnClickListener {
-            Simcoe.database?.beerDao()?.insertAll(Beer("KBS", "Imperial Stout"))
+            viewModel.save(Beer("KBS", "Imperial Stout"))
         }
 
-        Simcoe.database?.beerDao()?.getAllBeers()
-                ?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe { beers ->
-                    beerList.adapter = ArrayAdapter<Beer>(
-                            this, android.R.layout.simple_expandable_list_item_1, beers
-                    )
-                }
+        disposables.add(viewModel.getBeers { beers ->
+            beerList.adapter = ArrayAdapter<Beer>(
+                this, android.R.layout.simple_expandable_list_item_1, beers
+            )
+        })
     }
 }
