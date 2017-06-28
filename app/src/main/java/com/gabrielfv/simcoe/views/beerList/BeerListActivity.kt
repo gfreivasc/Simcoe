@@ -1,11 +1,9 @@
 package com.gabrielfv.simcoe.views.beerList
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import com.gabrielfv.simcoe.R
-import com.gabrielfv.simcoe.Simcoe
 import com.gabrielfv.simcoe.models.Beer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
