@@ -26,11 +26,23 @@ class BeerListActivity : AppCompatActivity() {
         fab.setOnClickListener {
             viewModel.save(Beer("KBS", "Imperial Stout"))
         }
+    }
 
-        disposables.add(viewModel.getBeers { beers ->
-            beerList.adapter = ArrayAdapter<Beer>(
-                this, android.R.layout.simple_expandable_list_item_1, beers
-            )
-        })
+    override fun onResume() {
+        super.onResume()
+        val disposable = viewModel.getBeers()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe({
+                    beerList.adapter = ArrayAdapter<Beer>(
+                            this, android.R.layout.simple_expandable_list_item_1, it
+                    )
+                })
+        disposables.add(disposable)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        disposables.dispose()
     }
 }
