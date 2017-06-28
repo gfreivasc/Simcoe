@@ -7,8 +7,10 @@ import com.gabrielfv.simcoe.R
 import com.gabrielfv.simcoe.models.Beer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_beer_list.*
+import org.reactivestreams.Subscription
 
 /**
  * @author by gabriel on 6/25/17.
@@ -28,7 +30,11 @@ class BeerListActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val disposable = viewModel.getBeers()
+        disposables.add(subscribeToBeerListChanges())
+    }
+
+    fun subscribeToBeerListChanges(): Disposable? {
+        return viewModel.getBeers()
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe({
@@ -36,11 +42,11 @@ class BeerListActivity : AppCompatActivity() {
                             this, android.R.layout.simple_expandable_list_item_1, it
                     )
                 })
-        disposables.add(disposable)
     }
 
     override fun onPause() {
-        super.onPause()
         disposables.dispose()
+        disposables.clear()
+        super.onPause()
     }
 }
