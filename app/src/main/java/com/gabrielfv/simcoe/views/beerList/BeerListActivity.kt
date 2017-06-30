@@ -10,7 +10,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_beer_list.*
-import org.reactivestreams.Subscription
 
 /**
  * @author by gabriel on 6/25/17.
