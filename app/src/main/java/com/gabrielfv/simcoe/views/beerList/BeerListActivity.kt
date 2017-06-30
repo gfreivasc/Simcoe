@@ -37,11 +37,10 @@ class BeerListActivity : AppCompatActivity() {
         return viewModel.getBeers()
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe({
+                ?.subscribe {
                     beerList.adapter = ArrayAdapter<Beer>(
-                            this, android.R.layout.simple_expandable_list_item_1, it
-                    )
-                })
+                            this, android.R.layout.simple_expandable_list_item_1, it)
+                }
     }
 
     override fun onPause() {
