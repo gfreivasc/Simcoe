@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.gabrielfv.simcoe.R
 import com.gabrielfv.simcoe.models.Beer
-import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.*
 import com.github.salomonbrys.kodein.android.KodeinAppCompatActivity
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.provider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -24,7 +21,7 @@ class BeerListActivity : KodeinAppCompatActivity() {
 
     override fun provideOverridingModule() = Kodein.Module {
         bind<BeerListActivity>() with instance(this@BeerListActivity)
-        bind<BeerListViewModel>() with provider {
+        bind<BeerListViewModel>() with singleton {
             BeerListViewModel(this)
         }
     }
