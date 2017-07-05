@@ -40,14 +40,14 @@ class BeerListActivity : KodeinAppCompatActivity() {
         disposables.add(subscribeToBeerListChanges())
     }
 
-    fun subscribeToBeerListChanges(): Disposable? {
-        return viewModel().getBeers()
+    fun subscribeToBeerListChanges(): Disposable? = viewModel().getBeers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    beerList.adapter = ArrayAdapter<Beer>(
-                            this, android.R.layout.simple_expandable_list_item_1, it)
-                }
+                .subscribe { updateBeerList(it) }
+
+    fun updateBeerList(beers: List<Beer>) {
+        beerList.adapter = ArrayAdapter<Beer>(
+                this, android.R.layout.simple_expandable_list_item_1, beers)
     }
 
     override fun onPause() {
